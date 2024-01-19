@@ -9,13 +9,12 @@ const app = express();
 const port = 3000;
 const API_URL = "https://index-zogw.onrender.com";
 
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+
 
 app.use(bodyParser.json());
 
