@@ -1,15 +1,26 @@
 import express from "express";
 import bodyParser from "body-parser";
 import axios from "axios";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import path from 'path';
 
 const app = express();
 const port = 3000;
 const API_URL = "https://index-zogw.onrender.com";
 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+app.use(express.static(path.join(__dirname, "public")));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
 // Route to render the main page
 app.get("/", async (req, res) => {
